@@ -8,18 +8,7 @@ import GridDesign from "./components/GridDesign";
 function App() {
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
-  const notify = () => toast.success('Item Added Successfully', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-    });
-  const notifydelete = () => toast("Item deleted Successfully");
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -29,13 +18,16 @@ function App() {
     };
     if (value === "") {
       alert("Please Enter Valid Item");
+      toast.error("Enter Item");
     } else {
+      toast.success("Item Added Successfully");
       setTodos([...todos, todoObj]);
       setValue("");
     }
   };
 
   const handleDelete = (id) => {
+    toast.success("Item deleted Successfully");
     const newTodos = [...todos];
 
     let todoObjIndex = newTodos.findIndex((element) => {
@@ -66,7 +58,7 @@ function App() {
           </div>
           <div className="my-5">
             <button
-              onClick={notify}
+              // onClick={notify}
               type="submit"
               className="bg-cyan-500 text-[#ffff] text-xl rounded-md w-full px-5 py-3 capitalize hover:bg-cyan-600"
             >
@@ -82,7 +74,7 @@ function App() {
                 key={index}
                 todoObj={todoObj}
                 handleDelete={handleDelete}
-                onClick={notifydelete}
+  
               />
             );
           })}
